@@ -1,30 +1,30 @@
 var contadorFilas = 0;
 
-$(document).ready(function() {
+$(document).ready(function () {
     //alert('Documento Listo');
-    $("#btnAddFila").click(function(){
+    $("#btnAddFila").click(function () {
         var fila = $("<tr></tr>");
         var celda = $("<td></td>");
         var caja = $("<input></input>");
         $(caja).attr("type", "text");
-        $(caja).attr("id", "nombre"+contadorFilas);
-        $(caja).attr("placeholder","Nombre del Producto");
+        $(caja).attr("id", "nombre" + contadorFilas);
+        $(caja).attr("placeholder", "Nombre del Producto");
         $(celda).append(caja);
         $(fila).append(celda);
         celda = $("<td></td>");
         caja = $("<input></input>");
         $(caja).attr("type", "number");
-        $(caja).attr("placeholder","Cantidad del Producto");
-        $(caja).attr("id", "cantidad"+contadorFilas);
+        $(caja).attr("placeholder", "Cantidad del Producto");
+        $(caja).attr("id", "cantidad" + contadorFilas);
         //$(caja).
-        $(caja).focusout(function(){
+        $(caja).focusout(function () {
             var valor = $(this).val();
-            if ($(this).val().length==0) {
+            if ($(this).val().length == 0) {
                 $(this).removeClass("negativo");
                 $(this).removeClass("positivo");
                 return;
             }
-            if (Number(valor)>=0) {
+            if (Number(valor) >= 0) {
                 $(this).addClass("positivo");
                 $(this).removeClass("negativo");
             } else {
@@ -37,18 +37,18 @@ $(document).ready(function() {
         celda = $("<td></td>");
         caja = $("<input></input>");
         $(caja).attr("type", "number");
-        $(caja).attr("placeholder","Precio del Producto");
-        $(caja).attr("id", "precio"+contadorFilas);
-        $(caja).keyup(function(e) {
+        $(caja).attr("placeholder", "Precio del Producto");
+        $(caja).attr("id", "precio" + contadorFilas);
+        $(caja).keyup(function (e) {
             var code = e.key;
-            if(code==="Enter") {
-                var txtId=$(this).attr("id");
+            if (code === "Enter") {
+                var txtId = $(this).attr("id");
                 var value = $(this).val();
                 var valorPrecio = Number(value);
                 var numeroId = txtId.substr(6);
-                value = $("#cantidad"+numeroId).val();
+                value = $("#cantidad" + numeroId).val();
                 var valorCantidad = Number(value);
-                $("#subtotal"+numeroId).val(""+(valorCantidad*valorPrecio))
+                $("#subtotal" + numeroId).val("" + (valorCantidad * valorPrecio))
 
                 e.preventDefault();
                 /*var value = $(this).val();
@@ -72,16 +72,16 @@ $(document).ready(function() {
         celda = $("<td></td>");
         caja = $("<input></input>");
         $(caja).attr("type", "number");
-        $(caja).attr("placeholder","Subtotal del Producto");
+        $(caja).attr("placeholder", "Subtotal del Producto");
         $(caja).attr("readonly", "readonly");
-        $(caja).attr("id", "subtotal"+contadorFilas);
+        $(caja).attr("id", "subtotal" + contadorFilas);
         $(celda).append(caja);
         $(fila).append(celda);
         celda = $("<td></td>");
         var boton = $("<button></button>");
         $(boton).attr("type", "button");
         $(boton).text("Eliminar");
-        $(boton).click(function(){
+        $(boton).click(function () {
             var padre = $(this).parent();
             var abuelo = $(padre).parent();
             $(abuelo).remove();
@@ -90,6 +90,14 @@ $(document).ready(function() {
         $(fila).append(celda);
 
         $("#cuerpo-tabla-1").append(fila);
-        contadorFilas=contadorFilas+1;
+        contadorFilas = contadorFilas + 1;
+    });
+
+    $("#btnCalcular").click(function(){
+        var suma = 0;
+        $("input[id^=subtotal]").each(function( index ) {
+            suma=suma+Number($( this ).val() );
+          });;
+        alert("Total="+suma);
     });
 });
