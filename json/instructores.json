@@ -1,0 +1,13 @@
+{"instructores":[{"nombre": "Freddy","apellido": "Mendez","edad": 45,"lenguajes":["Java","Php","Python"]
+},
+        {
+            "nombre": "Sergio",
+            "apellido": "Marin",
+            "edad": 30,
+            "lenguajes": [
+                "Php",
+                "Python"
+            ]
+        }
+    ]
+}
